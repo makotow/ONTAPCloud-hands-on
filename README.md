@@ -5,6 +5,7 @@
 
 Simple hands-on material for Ontap Cloud (OTC) for AWS.
 
+[ONTAP Cloud Hands-on Guide](./article.md)
 
 ## Requirements
 

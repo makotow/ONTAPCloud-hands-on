@@ -1,4 +1,4 @@
-# AWS Hands-on：簡単NetApp Cloud Solution (ONTAP Cloud編) 
+# AWS Hands-on：簡単NetApp Cloud Solution (ONTAP Cloud編)
 
 [TOC]
 
@@ -135,7 +135,7 @@ OCCMの画面の左上の Add Environmentをクリックします。
 | 入力項目 |説明| 入力値 |
 | --- | --- |--- |
 | AWS region | デプロイするリージョン | Asia Pacific \| Tokyo を選択|
-| VPC | デプロイするVPC| 10.0.0.0/16を選択| 
+| VPC | デプロイするVPC| 10.0.0.0/16を選択|
 | SSH authentication method| SSH の認証方法 |Key Pair を選択|
 |Key Pair| キーペア名| OTC を選択|
 
@@ -168,7 +168,7 @@ BYOLラインセンスを使用するかの選択、今回のハンズオンで�
 | 入力項目 |説明| 入力値 |
 | --- | --- |--- |
 | Volume Name | 初期作成するボリューム名 | vol01|
-| Size(GB) | 作成するボリュームのサイズ| 1| 
+| Size(GB) | 作成するボリュームのサイズ| 1|
 | Protocol| ONTAP Cloud で作成するシェアへのアクセスプロトコル |NFSを選択|
 |Access control| 作成したボリュームにアクセスできるネットワーク| 変更なし、初期値でデプロイしたVPCのネットワークアドレスが指定されている|
 |Snapshot policy| スナップショット取得の設定| 変更なし、初期値|
@@ -291,6 +291,7 @@ SnapMirrorの使い所としては、AZ 間のデータ保護、災害対策用�
 | Tag Key | 識別子 | PoC2|
 | Password |パスワード | NetApp1! |
 | Confirm Password |確認用パスワード | NetApp1! |
+
 ![ConfigWorkingEnv](images/15059734064043.jpg)
 「Continue」をクリック
 
@@ -298,10 +299,10 @@ SnapMirrorの使い所としては、AZ 間のデータ保護、災害対策用�
 | --- | --- |--- |
 |AWS  region  | デプロイするリージョン | Asia Pacific  \| Tokyo |
 | VPC | デプロイするVPC | 10.0.0.0/16 |
-| Subnet | デプロイするSubnet| 10.0.1.0/24 | 
-| Security Group | 適応するSecurityGroup | Use a generated security group (自動生成) | 
-| SSH authentication method | SSH認証の方法 | Key Pair | 
-| Key Pair | 使用するKey Pair| OTC | 
+| Subnet | デプロイするSubnet| 10.0.1.0/24 |
+| Security Group | 適応するSecurityGroup | Use a generated security group (自動生成) |
+| SSH authentication method | SSH認証の方法 | Key Pair |
+| Key Pair | 使用するKey Pair| OTC |
 
 ![DeployVPC](images/15059735571754.jpg)
 「Continue」をクリック。
@@ -329,41 +330,55 @@ ONTAP Cloud のエディションを選択、一番左の「Poc and small worklo
 以上でSnapMirrorの準備が整いました。
 
 #### SnapMirrorの設定をする
+
 Working Environments の画面で操作をします。
 右側のONTAP01 をドラッグして、左側のONTAP02にドロップします。
+
 ![OnCommand_Cloud_Manage](images/OnCommand_Cloud_Manager.jpg)
 
 送信元となるONTAP01のボリュームを選択する画面になります。
 ここでは「vol01」をクリックします。
+
 ![SnapMirror_Sr](images/SnapMirror_Src.jpg)
 
 次に送信先となるONTAP02 の設定になります。
 送信先のボリューム作成画面になります。
 ここでは「General Purpose SSD」を選択します。
+
 ![SnapMirrorDest](images/SnapMirrorDest.jpg)
+
 「Continue」をクリックします。
 
 転送速度のMax値を指定します。今回は特に指定せずそのまま「Continue」をクリックします。
+
 ![SnapMirrorLimit](images/SnapMirrorLimit.jpg)
 
 データをミラーするのか、バックアップするかの選択画面となります。
 今回はミラーの設定とするため、左側の「Mirror」を選択します。
+
 ![MirrorConfig](images/MirrorConfig.jpg)
 
 ミラーのスケジュールが可能です、今回は一度のみのコピーとします。
 「One-time copy」を選択します。
+
 ![SnapSchedule](images/SnapSchedule.jpg) 次の画面に遷移し、今まで設定した内容の確認画面となります。
+
 内容が確認できたらチェックボックスにチェックを入れ「Go」をクリックします。
+
 ![Review](images/Review.jpg)
 
 SnapMirrorの関係、データの転送を実行中の際には以下のような画面になります。
+
 ![SnapMirrorRelations](images/SnapMirrorRelations.jpg)
+
 進捗状況は 「TImeline」から確認できます。
 
 SnapMirror実施中はStatus欄が「In Progress」で表示されます。
+
 ![SnapMirrorStatus_InProgress](images/SnapMirrorStatus_InProgress.jpg)
 
 SnapMirror関係、データ転送が完了すると Status 欄が「Complete」となります。
+
 ![SnapMirrorStatusComplete](images/SnapMirrorStatusComplete.jpg)
 
 「Replication Status」をクリックするとSnapMirrorの状況を確認することができます。
@@ -376,7 +391,7 @@ SnapMirrorはドラッグ＆ドロップで実現することが可能です。
 
 - CloudManager から接続
 
-### Discover で NetApp Private Storage の LIF 
+### Discover で NetApp Private Storage の LIF
 -->
 
 ### サーバからマウント
@@ -418,7 +433,7 @@ Working Environments から ONTAP01をクリックし、、右の「Resources」
 ### AWS VPC 設計
 今回はハンズオンのため簡易的なネットワーク設計としています。
 
-### AWS環境の作成 
+### AWS環境の作成
 
 - CloudFormation提供 作成・削除
 - VPC/NAT gateway
@@ -517,5 +532,3 @@ Create my own configuration だと任意のライセンスタイプやインス�
 ![](images/15042642013479.jpg)
 ![](images/15042642214835.jpg)
 -->
-
-
